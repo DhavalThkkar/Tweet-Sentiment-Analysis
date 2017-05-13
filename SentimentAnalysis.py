@@ -35,17 +35,17 @@ def to_screen(msg):
 
 #%% Importing the Dataset
 to_screen('Importing Data...\n')
-data_original = pd.read_csv('D:/Kaggle/Sentiment Analysis - Dhavel/sentiment.tsv', delimiter = '\t', quoting=3)
+data_original = pd.read_csv('sentiment.tsv', delimiter = '\t', quoting=3)
 data_original_len = len(data_original)
 
 # Bootstrapping
 col_name = ['Sentiment', 'ID', 'Date', 'NA', 'Author', 'Tweet']
-data_resample = pd.read_csv('D:/Kaggle/Sentiment Analysis - Dhavel/training.1600000.processed.noemoticon.csv', names=col_name, encoding='ISO-8859-1')
+data_resample = pd.read_csv('training.1600000.processed.noemoticon.csv', names=col_name, encoding='ISO-8859-1')
 data_resample.drop(['ID','Date','NA','Author'], inplace=True, axis=1)
 pos_resample = data_resample[data_resample['Sentiment'] == 4]
 neg_resample = data_resample[data_resample['Sentiment'] == 0]
 
-n_resamples = 10000
+n_resamples = 5000
 pos_resample = pos_resample.iloc[np.random.choice(len(pos_resample), size=n_resamples)]
 neg_resample = neg_resample.iloc[np.random.choice(len(neg_resample), size=n_resamples)]
 
